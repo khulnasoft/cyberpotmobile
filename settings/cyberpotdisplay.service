@@ -1,0 +1,14 @@
+[Unit]
+Description=CyberPot Display
+Wants=docker.service network-online.target
+After=docker.service network-online.target cyberpot.service
+
+[Service]
+Type=exec
+TimeoutSec=infinity
+WorkingDirectory=/home/$LOGNAME/cyberpotmobile
+ExecStartPre=/home/$LOGNAME/cyberpotmobile/tools/wait4net.sh
+ExecStart=/home/$LOGNAME/cyberpotmobile/bin/python3 /home/$LOGNAME/cyberpotmobile/display.py
+
+[Install]
+WantedBy=multi-user.target
